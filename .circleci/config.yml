@@ -22,11 +22,16 @@ workflows:
 
 jobs:
   setup:
-    docker:
-      - image: cimg/base:current
+    executor: continuation/default
     resource_class: medium #docker/machine/macos
     steps:
       - checkout
+      - run: 
+          name: Generate config
+          command: |
+            ./generate-config > generated_config.yml
+      - continuation/continue:
+          configuration_path: generated_config.yml
 
 
 
