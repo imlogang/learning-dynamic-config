@@ -17,7 +17,11 @@ orbs:
 workflows:
   learning dynamic config:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - main
 
 
 jobs:
