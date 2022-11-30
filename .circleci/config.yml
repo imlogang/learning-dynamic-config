@@ -30,6 +30,7 @@ jobs:
     resource_class: medium #docker/machine/macos
     steps:
       - checkout
+      - run: echo "no"
       - run: 
           name: Generate config
           command: |
