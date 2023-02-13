@@ -29,13 +29,13 @@ workflows:
   # when pipeline parameter, run-build-service-1-job is true, the
   # build-service-1 job is triggered.
   service-1:
-    when: << pipeline.parameters.run-build-service-1-job >>
+    when: << pipeline.parameters.testing >>
     jobs:
       - testing
   # when pipeline parameter, run-build-service-2-job is true, the
   # build-service-2 job is triggered.
   service-2:
-    when: << pipeline.parameters.run-build-service-2-job >>
+    when: << pipeline.parameters.testing-1 >>
     jobs:
       - testing-1
   # when pipeline parameter, run-build-service-1-job OR
