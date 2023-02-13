@@ -26,9 +26,6 @@ workflows:
           # 3-column, whitespace-delimited mapping. One mapping per
           # line:
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
-          mapping: |
-            testing true
-            testing-1 true
           base-revision: << pipeline.git.branch >>
           # this is the path of the configuration we should trigger once
           # path filtering and pipeline parameter value updates are
