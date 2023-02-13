@@ -1,0 +1,45 @@
+version: 2.1
+
+# the default pipeline parameters, which will be updated according to
+# the results of the path-filtering orb
+parameters:
+  testing:
+    type: boolean
+    default: false
+  testing-1:
+    type: boolean
+    default: false
+
+jobs:
+  testing:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run: echo "hello"
+  testing-1:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run: echo "hello-1"
+
+# here we specify our workflows, most of which are conditionally
+# executed based upon pipeline parameter values. Each workflow calls a
+# specific job defined above, in the jobs section.
+workflows:
+  # when pipeline parameter, run-build-service-1-job is true, the
+  # build-service-1 job is triggered.
+  service-1:
+    when: << pipeline.parameters.run-build-service-1-job >>
+    jobs:
+      - testing
+  # when pipeline parameter, run-build-service-2-job is true, the
+  # build-service-2 job is triggered.
+  service-2:
+    when: << pipeline.parameters.run-build-service-2-job >>
+    jobs:
+      - testing-1
+  # when pipeline parameter, run-build-service-1-job OR
+  # run-build-service-2-job is true, run-integration-tests job is
+  # triggered. see:
+  # https://circleci.com/docs/configuration-reference/#logic-statements
+  # for more information.
